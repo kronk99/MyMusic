@@ -1,0 +1,12 @@
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.csproj.AssemblyReference.cache
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.csproj.SuggestedBindingRedirects.cache
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.Login.resources
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.Properties.Resources.resources
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.csproj.GenerateResource.cache
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.csproj.CoreCompileInputs.cache
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\bin\Debug\Usuario.exe.config
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\bin\Debug\Usuario.exe
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\bin\Debug\Usuario.pdb
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.exe
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.pdb
+C:\Users\Luis\Documents\repositorio gitkraken\Proyecto_2_BD1\PROYECTO2\Usuario\obj\Debug\Usuario.Registrarse.resources
