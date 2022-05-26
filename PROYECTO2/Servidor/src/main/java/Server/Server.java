@@ -50,24 +50,27 @@ public class Server implements  Runnable{
             try {
                 System.out.println(dataInputStream.available());
                 int filelenght = dataInputStream.readInt();
-                System.out.println("el numero es : " + filelenght);
+                System.out.println("el largo filename es : " + filelenght);
                 if (filelenght > 0) {
                     byte[] fileNameBytes = new byte[filelenght];
-                    System.out.println("SE AGIGNO UN NUEVO FILENAMEBYTE");
+
                     dataInputStream.readFully(fileNameBytes, 0, filelenght);
-                    System.out.println("SE leyo completamente el dataimput");
+                    System.out.println(fileNameBytes);
+
                     String filename = new String(fileNameBytes);
-                    System.out.println("SE AGIGNO UN string filename");
+                    System.out.println("el filename es: + " + filename);
                     int filecontent = dataInputStream.readInt();
-                    System.out.println("SE leyo nuevamente el");
+                    System.out.println("SE leyo el largo del file: " + filecontent);
                     if (filecontent > 0) {
-                        byte[] filecontentbyte = new byte[filecontent];
+                        byte[] filecontentbyte = new byte[filecontent];//deberia de leer a partir del 2 byte?
                         dataInputStream.readFully(filecontentbyte, 0, filecontent);
-                        String filecontenido = new String(filecontentbyte);
+                        System.out.println(filecontentbyte);
+                        String filecontenido = new String(filecontentbyte); //EL ERROR ESTA ACA
+                        System.out.println(filecontenido);
 //aca se llama la instancia de xml builder añade los argumentos de string de aca y crea el xml en el server.
-                        System.out.println(filename + filecontenido);
+
                         //xmlBuilder1.buildXml(filename, filecontenido);
-                        chekcer.check(filename , filecontenido);
+                        chekcer.check(filename , filecontenido ,filecontentbyte);
 
                     }
                 }

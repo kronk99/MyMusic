@@ -84,51 +84,54 @@ public class Cliente {
     }
     public void sendMusic(){
         if (musicTosend != null){
-            try {
+            try { //probar cambiar el nombre del fileimputstream
                 fileInputStream = new FileInputStream(musicTosend.getAbsolutePath());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            String filename = musicTosend.getName();
+            String filename = musicTosend.getName(); //NOMBRE DEL ARCHIVO
             byte[] fileNameByte = filename.getBytes();
-            System.out.println(fileNameByte);
+            System.out.println(fileNameByte); //NUMERO DE BYTES DEL NOMBRE
 //creo qu eel error esta aca, puesto que el
-            byte[] fileContentByte = new byte[(int)musicTosend.length()];
+            byte[] fileContentByte = new byte[(int)musicTosend.length()]; //CONTENIDO DEL ARCHIVO
             try {
-                fileInputStream.read(fileContentByte);
+                fileInputStream.read(fileContentByte); //lee los contenidos d elos bytes
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                dataOutputStream.writeInt(fileNameByte.length);
+                dataOutputStream.writeInt(fileNameByte.length); //envia el largo del nombre
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(fileNameByte.length);
+            System.out.println(fileNameByte.length); //IMPRIME EL LARGO DE LOS BYTES
             System.out.println("Se envio el filename.int");
             try {
-                dataOutputStream.write(fileNameByte);
+                dataOutputStream.write(fileNameByte); //ENVIA LOS BYTES DEL NOMBRE
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Se envio el filename.bytet");
             System.out.println(fileContentByte);
+            System.out.println("Se envio el filename.bytet");
 
             try {
-                dataOutputStream.writeInt(fileContentByte.length);
+                dataOutputStream.writeInt(fileContentByte.length); //ENVIA EL LARGO DEL CONTENIDO
+                System.out.println("el largo de los fylecontentbytes es:" + fileContentByte.length);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                dataOutputStream.write(fileContentByte);
+                dataOutputStream.write(fileContentByte); //envia los filecontent bytes
+                System.out.println("los bytes de fylecontentbytes son:" + fileContentByte);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             System.out.println("se envio todo");
-
         }
         musicTosend = null;
     }
+    //PROBAR IMPRIMIR LO QUE ESTARIA ENVIANDO A V3ER SI LLEGA CORRUPTO
     public void receivemessage(){
         new Thread(new Runnable() {
             @Override
@@ -146,6 +149,6 @@ public class Cliente {
         }).start();
     }
 
-
+//se envian filecontentbytes muy grandes 1462159 bytes, probar enviar arrays de ints
 
 }

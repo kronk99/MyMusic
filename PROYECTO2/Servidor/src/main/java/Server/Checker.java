@@ -5,10 +5,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Checker {
     private int value;
@@ -17,7 +14,7 @@ public class Checker {
         value = 0;
         xmlBuilder = new xmlBuilder();
     }
-    public void check(String filename, String data) throws IOException, TransformerException, SAXException {
+    public void check(String filename, String data , byte[] filebytes) throws IOException, TransformerException, SAXException {
         switch (filename){
             case "registro.xml":
                 xmlBuilder.buildXml(filename, data);
@@ -43,14 +40,22 @@ public class Checker {
                     //metodo llega pero no a la carpeta de musica.
                     System.out.println("va a crearse la file");
                     System.out.println(filename);
-                    File file = new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music" + filename + "1" + ".mp3");
+                    File file = new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music\\" + filename + "1" + ".mp3");
                     System.out.println("se creo la file");
+                    FileOutputStream fileOutputStream = new FileOutputStream(file);
+                    fileOutputStream.write(filebytes);
+                    fileOutputStream.close();
                     file.createNewFile();
                     System.out.println("se guardo la file");
-                    FileWriter fileWriter = new FileWriter(file.getAbsolutePath());
-                    BufferedWriter bw = new BufferedWriter(fileWriter);
-                    bw.write(data); // probar data, 0 , final de donde tiene que escribir
-                    bw.close();
+
+
+                    //si no sirve el write antes del crear file , ponerlo abajo
+
+                    //FileWriter fileWriter = new FileWriter(file.getAbsolutePath()); //cambiar por file normal
+                    //BufferedWriter bw = new BufferedWriter(fileWriter);
+                    //bw.write(data , 0 , content); // probar data, 0 , final de donde tiene que escribir
+                   // bw.close();
+                    //tal vez escribir desde 0 hasta el filelenght
 
                 }catch (IOException E){
                     E.printStackTrace();
