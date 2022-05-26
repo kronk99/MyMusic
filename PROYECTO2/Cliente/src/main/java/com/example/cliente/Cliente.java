@@ -10,6 +10,7 @@ public class Cliente {
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private File filetosend;
+    private File musicTosend;
     private Document register;
     private FileOutputStream fileOutputStream;
     private FileInputStream fileInputStream;
@@ -29,6 +30,9 @@ public class Cliente {
         System.out.println("la file a enviar es: " + this.filetosend);
         System.out.println("la file a enviar es: " + this.filetosend.getAbsolutePath());
 
+    }
+    public void setMusicTosend(File file){
+        this.musicTosend = file;
     }
 
     public void sendFiletoSv(){
@@ -78,8 +82,52 @@ public class Cliente {
         }
         filetosend = null;
     }
-    public void VAR(int num) throws IOException {
-        dataOutputStream.writeInt(num);
+    public void sendMusic(){
+        if (musicTosend != null){
+            try {
+                fileInputStream = new FileInputStream(musicTosend.getAbsolutePath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            String filename = musicTosend.getName();
+            byte[] fileNameByte = filename.getBytes();
+            System.out.println(fileNameByte);
+//creo qu eel error esta aca, puesto que el
+            byte[] fileContentByte = new byte[(int)musicTosend.length()];
+            try {
+                fileInputStream.read(fileContentByte);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                dataOutputStream.writeInt(fileNameByte.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(fileNameByte.length);
+            System.out.println("Se envio el filename.int");
+            try {
+                dataOutputStream.write(fileNameByte);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Se envio el filename.bytet");
+            System.out.println(fileContentByte);
+
+            try {
+                dataOutputStream.writeInt(fileContentByte.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                dataOutputStream.write(fileContentByte);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("se envio todo");
+
+        }
+        musicTosend = null;
     }
     public void receivemessage(){
         new Thread(new Runnable() {

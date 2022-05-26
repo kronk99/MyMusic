@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.print.attribute.standard.Media;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,6 +20,7 @@ public class xmlBuilder {
     private DocumentBuilderFactory factory;
     private DocumentBuilder builder;
     private Document doc;
+    private Media media;
     private TransformerFactory transformerFactory;
     private Transformer transformer;
     private DOMSource source;

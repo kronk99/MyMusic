@@ -16,7 +16,7 @@
          </font>
       </Label>
       <Label layoutX="252.0" layoutY="192.0" text="CONTRASEÑA" />
-      <Button layoutX="250.0" layoutY="287.0" mnemonicParsing="false" onAction="#send" text="INGRESAR" />
+      <Button layoutX="250.0" layoutY="287.0" mnemonicParsing="false" onAction="#switchToScene4" text="INGRESAR" />
       <Button fx:id="btnChantoReg" layoutX="441.0" layoutY="287.0" mnemonicParsing="false" onAction="#switchToScene3" text="REGISTRARSE" />
       <Button layoutX="83.0" layoutY="287.0" mnemonicParsing="false" text="Button" />
    </children>

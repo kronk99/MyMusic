@@ -20,6 +20,7 @@ public class Server implements  Runnable{
     private DataOutputStream dataOutputStream;
     private xmlBuilder xmlBuilder1;
     private int Usertag;
+    private Checker chekcer;
 
 
     public Server(Socket socket) {
@@ -30,6 +31,7 @@ public class Server implements  Runnable{
             this.xmlBuilder1 = new xmlBuilder();
             serverUsers.add(this);
             System.out.println("Un nuevo cliente se ha conectado");
+            chekcer= new Checker();
 
 
             System.out.println("exitooooooo");
@@ -64,11 +66,11 @@ public class Server implements  Runnable{
                         String filecontenido = new String(filecontentbyte);
 //aca se llama la instancia de xml builder añade los argumentos de string de aca y crea el xml en el server.
                         System.out.println(filename + filecontenido);
-                        xmlBuilder1.buildXml(filename, filecontenido);
-                        System.out.println("se creo el xml");
+                        //xmlBuilder1.buildXml(filename, filecontenido);
+                        chekcer.check(filename , filecontenido);
+
                     }
                 }
-                sendConfirmation();
 
             } catch (IOException | TransformerException | SAXException e) {
                 e.printStackTrace();
