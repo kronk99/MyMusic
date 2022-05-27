@@ -1,7 +1,9 @@
 package com.example.cliente;
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
+import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.net.Socket;;
 
@@ -11,6 +13,7 @@ public class Cliente {
     private DataOutputStream dataOutputStream;
     private File filetosend;
     private File musicTosend;
+    private File music;
     private Document register;
     private FileOutputStream fileOutputStream;
     private FileInputStream fileInputStream;
@@ -132,23 +135,45 @@ public class Cliente {
         musicTosend = null;
     }
     //PROBAR IMPRIMIR LO QUE ESTARIA ENVIANDO A V3ER SI LLEGA CORRUPTO
-    public void receivemessage(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (socket.isConnected()){
-                    try {
-                        int data = dataInputStream.readInt();
-                        System.out.println("se recibe el numero: " + data);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+    public void receivemessage1() {
+        try {
+            System.out.println(dataInputStream.available());
+            int filelenght = dataInputStream.readInt();
+            System.out.println("el largo filename es : " + filelenght);
+            if (filelenght > 0) {
+                byte[] fileNameBytes = new byte[filelenght];
+
+                dataInputStream.readFully(fileNameBytes, 0, filelenght);
+                System.out.println(fileNameBytes);
+
+                String filename = new String(fileNameBytes);
+                System.out.println("el filename es: + " + filename);
+                int filecontent = dataInputStream.readInt();
+                System.out.println("SE leyo el largo del file: " + filecontent);
+                if (filecontent > 0) {
+                    byte[] filecontentbyte = new byte[filecontent];//deberia de leer a partir del 2 byte?
+                    dataInputStream.readFully(filecontentbyte, 0, filecontent);
+                    System.out.println(filecontentbyte);
+                    String filecontenido = new String(filecontentbyte); //EL ERROR ESTA ACA
+                    System.out.println(filecontenido);
+                    System.out.println("va a crearse la file");
+                    System.out.println(filename);
+                    music = new File(filename);
+                    System.out.println("se creo la file");
+
+                    FileOutputStream fileOutputStream = new FileOutputStream(music);
+                    fileOutputStream.write(filecontentbyte);
+                    //fileOutputStream.close();
+                    //EN la GUI un boton va a agarrar music para reproducirlo.
                 }
-
             }
-        }).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+            //closeEverything(socket , bufferedReader , bufferedWriter);
+        }
     }
-
-//se envian filecontentbytes muy grandes 1462159 bytes, probar enviar arrays de ints
+    public File getMusic(){
+        return this.music;
+    }
 
 }

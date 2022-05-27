@@ -33,6 +33,9 @@ public class Checker {
                 //debe leer el nombre de la instruccion
                 //ejecuta la instruccion (quicksort, insertion sort)
                 break;
+            case "reproducir.xml":
+                //leer el xml
+                //retornar un 3
             default:
                 //aca si no es ninguno de esos nombres debe crear una file y guardarla en una careta
 

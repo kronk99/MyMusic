@@ -49,7 +49,6 @@ public class HelloController implements Initializable {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
-        cliente.receivemessage();
     }
 
     public void switchToScene3(ActionEvent event) throws IOException {

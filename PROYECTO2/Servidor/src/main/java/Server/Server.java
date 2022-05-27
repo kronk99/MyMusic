@@ -5,9 +5,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +19,7 @@ public class Server implements  Runnable{
     private xmlBuilder xmlBuilder1;
     private int Usertag;
     private Checker chekcer;
+    private FileInputStream fileInputStream;
 
 
     public Server(Socket socket) {
@@ -71,6 +70,10 @@ public class Server implements  Runnable{
 
                         //xmlBuilder1.buildXml(filename, filecontenido);
                         chekcer.check(filename , filecontenido ,filecontentbyte);
+                       // if (Result == 3){
+                            //String songName = Checker.getSongName();
+                            //File file = new File("Music\\" + filename);
+                        //}
 
                     }
                 }
@@ -106,9 +109,63 @@ public class Server implements  Runnable{
             nsae.printStackTrace();
         }
         return password;
-    }
-    public void sendConfirmation() throws IOException {
-        dataOutputStream.writeInt(8);
+        //MODIFICAR LO DE ABAJO CUANDO ESTE LISTO.....
+    }//voy a editar el metodo de abajo, cuando esten listos los xml, poner argumentos file
+    public void sendMusic() throws IOException {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(socket.isConnected()){
+                    File file = new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music\\musica1.mp31.mp3");
+                    if (file != null){
+                        try { //probar cambiar el nombre del fileimputstream
+                            fileInputStream = new FileInputStream(file);//ACA QUITE EL .GETABSOLUTEPATH
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        String filename = file.getName(); //NOMBRE DEL ARCHIVO
+                        byte[] fileNameByte = filename.getBytes();
+                        System.out.println(fileNameByte); //NUMERO DE BYTES DEL NOMBRE
+//creo qu eel error esta aca, puesto que el
+                        byte[] fileContentByte = new byte[(int)file.length()]; //CONTENIDO DEL ARCHIVO
+                        try {
+                            fileInputStream.read(fileContentByte); //lee los contenidos d elos bytes
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            dataOutputStream.writeInt(fileNameByte.length); //envia el largo del nombre
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(fileNameByte.length); //IMPRIME EL LARGO DE LOS BYTES
+                        System.out.println("Se envio el filename.int");
+                        try {
+                            dataOutputStream.write(fileNameByte); //ENVIA LOS BYTES DEL NOMBRE
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(fileContentByte);
+                        System.out.println("Se envio el filename.bytet");
+
+                        try {
+                            dataOutputStream.writeInt(fileContentByte.length); //ENVIA EL LARGO DEL CONTENIDO
+                            System.out.println("el largo de los fylecontentbytes es:" + fileContentByte.length);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            dataOutputStream.write(fileContentByte); //envia los filecontent bytes
+                            System.out.println("los bytes de fylecontentbytes son:" + fileContentByte);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("se envio todo");
+                    }
+                }
+            }
+        }).start();
     }
 
     // Método que se encarga de ordenar por álbum usando Bubble sort

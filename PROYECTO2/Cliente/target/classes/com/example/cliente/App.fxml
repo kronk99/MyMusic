@@ -8,16 +8,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cliente.AppController">
    <children>
-      <Slider layoutX="9.0" layoutY="309.0" prefHeight="14.0" prefWidth="583.0" />
-      <Button layoutX="24.0" layoutY="340.0" mnemonicParsing="false" text="Play" />
-      <Button layoutX="89.0" layoutY="340.0" mnemonicParsing="false" text="volume" />
+      <Slider fx:id="bar_Music" layoutX="9.0" layoutY="309.0" prefHeight="14.0" prefWidth="583.0" />
+      <Button layoutX="24.0" layoutY="340.0" mnemonicParsing="false" onAction="#startMusic" text="Play" />
+      <Button layoutX="89.0" layoutY="340.0" mnemonicParsing="false" onAction="#pauseMusic" text="Pausar Musica" />
       <ListView fx:id="musicListview" layoutX="163.0" layoutY="24.0" prefHeight="240.0" prefWidth="250.0" />
-      <Button layoutX="262.0" layoutY="276.0" mnemonicParsing="false" text=" Select Song" />
+      <Button layoutX="262.0" layoutY="276.0" mnemonicParsing="false" onAction="#setMusic" text=" Select Song" />
       <Button layoutX="450.0" layoutY="48.0" mnemonicParsing="false" text="name" />
       <Button layoutX="450.0" layoutY="90.0" mnemonicParsing="false" text="Album " />
       <Button layoutX="452.0" layoutY="132.0" mnemonicParsing="false" text="Artista" />
       <Label layoutX="443.0" layoutY="16.0" text="Buscar por:" />
       <Button layoutX="470.0" layoutY="276.0" mnemonicParsing="false" onAction="#adddata" text="subir cancion" />
-      <Slider layoutX="160.0" layoutY="346.0" />
+      <Slider fx:id="bar_Volume" layoutX="204.0" layoutY="346.0" />
    </children>
 </AnchorPane>

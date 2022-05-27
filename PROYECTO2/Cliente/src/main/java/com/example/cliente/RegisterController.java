@@ -43,7 +43,7 @@ public class RegisterController implements Initializable {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
-        cliente.receivemessage();
+
     }
 
     public void sendRegistertoClient2() throws IOException, TransformerException {
