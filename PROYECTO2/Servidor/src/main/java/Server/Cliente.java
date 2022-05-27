@@ -21,7 +21,6 @@ public class Cliente {
 
                 Thread thread= new Thread(server);
                 thread.start();
-                server.sendMusic();
             }
         }catch (IOException e){
             e.printStackTrace();

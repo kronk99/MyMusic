@@ -11,12 +11,13 @@ public class Checker {
     private int value;
     private xmlBuilder xmlBuilder;
     private xmlReader xmlReader1;
+    private String music;
     public Checker() throws TransformerConfigurationException, ParserConfigurationException {
         value = 0;
         xmlBuilder = new xmlBuilder();
         xmlReader1 = new xmlReader();
     }
-    public void check(String filename, String data , byte[] filebytes) throws IOException, TransformerException, SAXException {
+    public void check(String filename, String data , byte[] filebytes) throws IOException, TransformerException, SAXException, ParserConfigurationException {
         switch (filename){
             case "registro.xml":
                 xmlBuilder.buildXml(filename, data);
@@ -38,16 +39,19 @@ public class Checker {
             case "searchMusic.xml":
                 xmlBuilder.buildXml(filename, data);
                 xmlReader1.readXml(filename);
+                music = xmlReader1.getSong();
+                break;
                 //leer el xml
                 //retornar un 3
             default:
                 //aca si no es ninguno de esos nombres debe crear una file y guardarla en una careta
 
                 try{
+                    System.out.println("Se llego al constructor de canciones");
                     //metodo llega pero no a la carpeta de musica.
                     System.out.println("va a crearse la file");
                     System.out.println(filename);
-                    File file = new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music\\" + filename + "1" + ".mp3");
+                    File file = new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music\\" + filename );
                     System.out.println("se creo la file");
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
                     fileOutputStream.write(filebytes);
@@ -70,5 +74,11 @@ public class Checker {
                 break;
         }
 
+    }
+    public String getMusic(){
+        return this.music;
+    }
+    public void resetMusic(){
+        this.music = null;
     }
 }

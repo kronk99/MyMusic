@@ -34,7 +34,7 @@ public class xmlBuilder {
     public void buildXml(String name, String data) throws IOException, SAXException, TransformerException {
         doc = builder.parse(new InputSource(new StringReader(data)));
         source = new DOMSource(doc);
-        result = new StreamResult(new File(name));
+        result = new StreamResult(new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\" + name));
         transformer.transform(source, result);
 
 

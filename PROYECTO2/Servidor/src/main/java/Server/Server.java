@@ -70,11 +70,13 @@ public class Server implements  Runnable{
 
                         //xmlBuilder1.buildXml(filename, filecontenido);
                         chekcer.check(filename , filecontenido ,filecontentbyte);
-                       // if (Result == 3){
-                            //String songName = Checker.getSongName();
-                            //File file = new File("Music\\" + filename);
-                        //}
-
+                        String music = chekcer.getMusic();
+                        if (music != null){
+                            music = music.replaceAll("\\s", "");//ELIMINA ESPACIOS EN BLANCO
+                            System.out.println("la musica a enviar es :" + music);
+                            sendMusic(music);
+                            chekcer.resetMusic();
+                        }
                     }
                 }
 
@@ -83,6 +85,8 @@ public class Server implements  Runnable{
                 //closeEverything(socket , bufferedReader , bufferedWriter);
                 break;
 
+            } catch (ParserConfigurationException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -111,61 +115,56 @@ public class Server implements  Runnable{
         return password;
         //MODIFICAR LO DE ABAJO CUANDO ESTE LISTO.....
     }//voy a editar el metodo de abajo, cuando esten listos los xml, poner argumentos file
-    public void sendMusic() throws IOException {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(socket.isConnected()){
-                    File file = new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music\\musica1.mp31.mp3");
-                    if (file != null){
-                        try { //probar cambiar el nombre del fileimputstream
-                            fileInputStream = new FileInputStream(file);//ACA QUITE EL .GETABSOLUTEPATH
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        String filename = file.getName(); //NOMBRE DEL ARCHIVO
-                        byte[] fileNameByte = filename.getBytes();
-                        System.out.println(fileNameByte); //NUMERO DE BYTES DEL NOMBRE
-//creo qu eel error esta aca, puesto que el
-                        byte[] fileContentByte = new byte[(int)file.length()]; //CONTENIDO DEL ARCHIVO
-                        try {
-                            fileInputStream.read(fileContentByte); //lee los contenidos d elos bytes
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            dataOutputStream.writeInt(fileNameByte.length); //envia el largo del nombre
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println(fileNameByte.length); //IMPRIME EL LARGO DE LOS BYTES
-                        System.out.println("Se envio el filename.int");
-                        try {
-                            dataOutputStream.write(fileNameByte); //ENVIA LOS BYTES DEL NOMBRE
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println(fileContentByte);
-                        System.out.println("Se envio el filename.bytet");
-
-                        try {
-                            dataOutputStream.writeInt(fileContentByte.length); //ENVIA EL LARGO DEL CONTENIDO
-                            System.out.println("el largo de los fylecontentbytes es:" + fileContentByte.length);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            dataOutputStream.write(fileContentByte); //envia los filecontent bytes
-                            System.out.println("los bytes de fylecontentbytes son:" + fileContentByte);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("se envio todo");
-                    }
-                }
+    public void sendMusic(String name) throws IOException {
+        File file = new File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music\\" + name);
+        if (file != null) {
+            System.out.println("se va a enviar la cancion: " +file.getName());
+            try { //probar cambiar el nombre del fileimputstream
+                fileInputStream = new FileInputStream(file);//ACA QUITE EL .GETABSOLUTEPATH
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
-        }).start();
+            String filename = file.getName(); //NOMBRE DEL ARCHIVO
+            byte[] fileNameByte = filename.getBytes();
+            System.out.println(fileNameByte); //NUMERO DE BYTES DEL NOMBRE
+//creo qu eel error esta aca, puesto que el
+            byte[] fileContentByte = new byte[(int) file.length()]; //CONTENIDO DEL ARCHIVO
+            try {
+                fileInputStream.read(fileContentByte); //lee los contenidos d elos bytes
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                dataOutputStream.writeInt(fileNameByte.length); //envia el largo del nombre
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(fileNameByte.length); //IMPRIME EL LARGO DE LOS BYTES
+            System.out.println("Se envio el filename.int");
+            try {
+                dataOutputStream.write(fileNameByte); //ENVIA LOS BYTES DEL NOMBRE
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(fileContentByte);
+            System.out.println("Se envio el filename.bytet");
+
+            try {
+                dataOutputStream.writeInt(fileContentByte.length); //ENVIA EL LARGO DEL CONTENIDO
+                System.out.println("el largo de los fylecontentbytes es:" + fileContentByte.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                dataOutputStream.write(fileContentByte); //envia los filecontent bytes
+                System.out.println("los bytes de fylecontentbytes son:" + fileContentByte);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("se envio todo");
+
+        }
     }
 
     // Método que se encarga de tomar el album de cada canción

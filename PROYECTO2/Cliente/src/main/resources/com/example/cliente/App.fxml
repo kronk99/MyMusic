@@ -19,5 +19,6 @@
       <Label layoutX="443.0" layoutY="16.0" text="Buscar por:" />
       <Button layoutX="470.0" layoutY="276.0" mnemonicParsing="false" onAction="#adddata" text="subir cancion" />
       <Slider fx:id="bar_Volume" layoutX="204.0" layoutY="346.0" />
+      <Button layoutX="24.0" layoutY="264.0" mnemonicParsing="false" onAction="#setMusic" text="crear reproductor" />
    </children>
 </AnchorPane>
