@@ -16,6 +16,7 @@ import javafx.scene.media.Media;
 import javafx.util.Duration;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,12 +54,13 @@ public class AppController implements Initializable {
             }
         });
     }
-    public void adddata(){
+
+    public void adddata() {
         File file = filechoser.showOpenDialog(new Stage());
         System.out.println(file);
         cliente.setMusicTosend(file);
         cliente.sendMusic();
-        //musicListview.getItems().add("hola sebas");
+        musicListview.getItems().add(file.getName());
         //esto de abajo es el codigo para enviar el xml y decirle
         // String selectedItem = musicListview.getSelectionModel().getSelectedItem();
         //System.out.println(selectedItem);
@@ -66,22 +68,35 @@ public class AppController implements Initializable {
         //int valor = musicListview.getSelectionModel().getSelectedIndex();
         //musicListview.getItems().remove(valor);
     }
-    public void setMusic(){
+
+    public void setMusic() {
         cliente.receivemessage1();
         media = new Media(cliente.getMusic().toURI().toString());
         mediaPlayer = new MediaPlayer(media);
 
     }
-    public void startMusic(){
+
+    public void startMusic() {
         mediaPlayer.play();
     }
-    public void pauseMusic(){
+
+    public void pauseMusic() {
         mediaPlayer.pause();
         mediaPlayer.seek(Duration.seconds(0));
 
     }
-    public void seekMusic(double value){
+
+    public void seekMusic(double value) {
         mediaPlayer.seek(Duration.seconds(value));
+    }
+    public void askMusic() throws TransformerException {
+        String selectedItem = musicListview.getSelectionModel().getSelectedItem();
+        System.out.println(selectedItem);
+        xmlBuilder1.xmlSearchMusic(selectedItem);
+        File file = new File("searchMusic.xml");
+        cliente.setMusicTosend(file);
+        cliente.sendMusic();
+
     }
 
 }

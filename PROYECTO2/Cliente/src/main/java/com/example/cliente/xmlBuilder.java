@@ -120,6 +120,80 @@ public class xmlBuilder {
 
 
     }
+    public void xmlSearchMusic(String musicname) throws TransformerException {
+        Document document = implementation.createDocument(null , "searchMusic" ,null );
+        document.setXmlVersion("1.0");
+        Element Musica = document.createElement("buscarMusica");
+        Text musicToListen = document.createTextNode(musicname);
+        Musica.appendChild(musicToListen);
+        //estos codigos de abajo pueden ser utiles para acceder a los elementos y sus valores
+        document.getDocumentElement().appendChild(Musica);
+        Source source = new DOMSource(document);
+        Result result = new StreamResult(new File("searchMusic.xml"));
+        Transformer transformer = new TransformerFactory() {
+            @Override
+            public Transformer newTransformer(Source source) throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public Transformer newTransformer() throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public Templates newTemplates(Source source) throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public Source getAssociatedStylesheet(Source source, String media, String title, String charset) throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public void setURIResolver(URIResolver resolver) {
+
+            }
+
+            @Override
+            public URIResolver getURIResolver() {
+                return null;
+            }
+
+            @Override
+            public void setFeature(String name, boolean value) throws TransformerConfigurationException {
+
+            }
+
+            @Override
+            public boolean getFeature(String name) {
+                return false;
+            }
+
+            @Override
+            public void setAttribute(String name, Object value) {
+
+            }
+
+            @Override
+            public Object getAttribute(String name) {
+                return null;
+            }
+
+            @Override
+            public void setErrorListener(ErrorListener listener) {
+
+            }
+
+            @Override
+            public ErrorListener getErrorListener() {
+                return null;
+            }
+        }.newInstance().newTransformer();
+        transformer.transform(source , result);
+
+    }
 
 
 

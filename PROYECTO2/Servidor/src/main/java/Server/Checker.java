@@ -10,9 +10,11 @@ import java.io.*;
 public class Checker {
     private int value;
     private xmlBuilder xmlBuilder;
+    private xmlReader xmlReader1;
     public Checker() throws TransformerConfigurationException, ParserConfigurationException {
         value = 0;
         xmlBuilder = new xmlBuilder();
+        xmlReader1 = new xmlReader();
     }
     public void check(String filename, String data , byte[] filebytes) throws IOException, TransformerException, SAXException {
         switch (filename){
@@ -33,7 +35,9 @@ public class Checker {
                 //debe leer el nombre de la instruccion
                 //ejecuta la instruccion (quicksort, insertion sort)
                 break;
-            case "reproducir.xml":
+            case "searchMusic.xml":
+                xmlBuilder.buildXml(filename, data);
+                xmlReader1.readXml(filename);
                 //leer el xml
                 //retornar un 3
             default:
