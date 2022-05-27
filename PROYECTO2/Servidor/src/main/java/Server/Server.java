@@ -168,8 +168,53 @@ public class Server implements  Runnable{
         }).start();
     }
 
+    // Método que se encarga de tomar el album de cada canción
+    public void takeAlbum(ArrayList<Songs> arrayList){
+
+        int i, max;
+        max = arrayList.size();
+        String[] albums = new String[max];
+        String album = "";
+
+        for (i = 0; i < max; i++){
+            album = arrayList.get(i).getAlbum().toString();
+            albums[i] = album;
+        }
+
+        sortByAlbum(albums, arrayList);
+    }
+
+    public void takeArtist(ArrayList<Songs> arrayList){
+
+        int i, max;
+        max = arrayList.size();
+        String[] artists = new String[max];
+        String artist = "";
+
+        for (i = 0; i < max; i++){
+            artist = arrayList.get(i).getArtist().toString();
+            artists[i] = artist;
+        }
+
+        sortByArtist(artists, arrayList);
+    }
+    public void takeSong(ArrayList<Songs> arrayList){
+
+        int i, max;
+        max = arrayList.size();
+        String[] songs = new String[max];
+        String song = "";
+
+        for (i = 0; i < max; i++){
+            song = arrayList.get(i).getSong().toString();
+            songs[i] = song;
+        }
+
+        sortBySong(songs, arrayList);
+    }
+
     // Método que se encarga de ordenar por álbum usando Bubble sort
-    public static void sortByAlbum(String[] array) {
+    public static void sortByAlbum(String[] array, ArrayList<Songs> arrayList) {
 
         int i, j, length;
         String aux;
@@ -184,10 +229,11 @@ public class Server implements  Runnable{
                 }
             }
         }
+        showSortByAlbum(array, arrayList);
     }
 
     // Método que se encarga de ordenar por artista usando Insertion sort
-    public static void sortByArtist(String array[]){
+    public static void sortByArtist(String array[], ArrayList<Songs> arrayList){
 
         String aux;
         int i, j, length;
@@ -202,24 +248,24 @@ public class Server implements  Runnable{
                 }
             }
         }
-
+        showSortByArtist(array, arrayList);
     }
 
     // Método que se encarga de ordenar por nombre de la canción usando Quick sort
     // sortBySong() recibe el arreglo
-    public static void sortBySong(String array[]) {
+    public static void sortBySong(String array[], ArrayList<Songs> arrayList) {
 
         String names[];
         int length;
         length = array.length;
         names = array;
 
-        quickSort(names, 0, length - 1);
+        quickSort(names, 0, length - 1, arrayList);
     }
 
     // Compara los valores del arreglo
     // Recibe el arreglo que envia sort()
-    public static void quickSort(String array[], int lowerIndex, int higherIndex) {
+    public static void quickSort(String array[], int lowerIndex, int higherIndex, ArrayList<Songs> arrayList) {
         int i = lowerIndex;
         int j = higherIndex;
         String pivot = array[lowerIndex + (higherIndex - lowerIndex) / 2];
@@ -228,11 +274,9 @@ public class Server implements  Runnable{
             while (array[i].compareToIgnoreCase(pivot) < 0) {
                 i++;
             }
-
             while (array[j].compareToIgnoreCase(pivot) > 0) {
                 j--;
             }
-
             if (i <= j) {
                 swap(array, i, j);
                 i++;
@@ -241,11 +285,13 @@ public class Server implements  Runnable{
         }
 
         if (lowerIndex < j) {
-            quickSort(array, lowerIndex, j);
+            quickSort(array, lowerIndex, j, arrayList);
         }
         if (i < higherIndex) {
-            quickSort(array, i, higherIndex);
+            quickSort(array, i, higherIndex, arrayList);
         }
+
+        showSortBySongs(array, arrayList);
     }
 
     // swap() se encarga de intercambiar los valores
@@ -253,5 +299,36 @@ public class Server implements  Runnable{
         String temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+
+    // Método que se encarga de mostrar la biblioteca ordenada por álbum
+    public static void showSortByAlbum(String[] array, ArrayList<Songs> arrayList){
+        for (int i = 0; i < array.length; i++){
+            for (int j = 0; j < arrayList.size(); j++){
+                if (array[i] == arrayList.get(j).getAlbum().toString()){
+                    System.out.println(arrayList.get(j));
+                }
+            }
+        }
+    }
+    // Método que se encarga de mostrar la biblioteca ordenada por artista
+    public static void showSortByArtist(String[] array, ArrayList<Songs> arrayList){
+        for (int i = 0; i < array.length; i++){
+            for (int j = 0; j < arrayList.size(); j++){
+                if (array[i] == arrayList.get(j).getArtist().toString()){
+                    System.out.println(arrayList.get(j));
+                }
+            }
+        }
+    }
+    // Método que se encarga de mostrar la biblioteca ordenada por canción
+    public static void showSortBySongs(String[] array, ArrayList<Songs> arrayList){
+        for (int i = 0; i < array.length; i++){
+            for (int j = 0; j < arrayList.size(); j++){
+                if (array[i] == arrayList.get(j).getSong().toString()){
+                    System.out.println(arrayList.get(j));
+                }
+            }
+        }
     }
 }
