@@ -1,5 +1,7 @@
 package Server;
 
+import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,13 +15,14 @@ public class Checker {
     private xmlBuilder xmlBuilder;
     private xmlReader xmlReader1;
     private String music;
+    private MP3File mp3File;
 
     public Checker() throws TransformerConfigurationException, ParserConfigurationException {
         value = 0;
         xmlBuilder = new xmlBuilder();
         xmlReader1 = new xmlReader();
     }
-    public void check(String filename, String data , byte[] filebytes) throws IOException, TransformerException, SAXException, ParserConfigurationException {
+    public void check(String filename, String data , byte[] filebytes) throws IOException, TransformerException, SAXException, ParserConfigurationException, TagException {
 
         // Se inicializa la lista
         UsersList usersListWrite = new UsersList(); // Instancia solamente para escribir
@@ -74,6 +77,24 @@ public class Checker {
                 break;
                 //leer el xml
                 //retornar un 3
+            case "modifyMeta.xml":
+                xmlBuilder.buildXml(filename, data);
+                xmlReader1.readMeta(filename);
+                String genero = xmlReader1.getGenero();
+                String Artista = xmlReader1.getArtista();
+                String Album = xmlReader1.getAlbum();
+                String año = xmlReader1.getAño();
+                String getletra = xmlReader1.getLetra();
+                String mCancion = xmlReader1.getmCancion();
+                mCancion = mCancion.replaceAll("\\s", "");
+                mp3File = new MP3File("C:\\Users\\Luis\\Documents\\repositorio gitkraken\\MyMusic\\PROYECTO2\\Servidor\\Music\\" + mCancion);
+                mp3File.getID3v2Tag().setSongGenre(genero);
+                mp3File.getID3v2Tag().setAuthorComposer(Artista);
+                mp3File.getID3v2Tag().setAlbumTitle(Album);
+                mp3File.getID3v2Tag().setYearReleased(año);
+                mp3File.getID3v2Tag().setSongLyric(getletra);
+                mp3File.save();
+                break;
             default:
                 //aca si no es ninguno de esos nombres debe crear una file y guardarla en una careta
 

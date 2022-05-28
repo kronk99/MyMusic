@@ -194,6 +194,105 @@ public class xmlBuilder {
         transformer.transform(source , result);
 
     }
+    public void mData(String Artista , String Album , String genero , String año , String letra ,String cancion) throws TransformerException {
+        Document document = implementation.createDocument(null , "modifyMeta" ,null );
+        document.setXmlVersion("1.0");
+        Element Cancion1 = document.createElement("Cancion1");
+        Element Artista1 = document.createElement("Artista1");
+        Element Album1 = document.createElement("Album1");
+        Element Genero1 = document.createElement("Genero1");
+        Element Año1 = document.createElement("Año1");
+        Element Letra1 = document.createElement("Letra1");
+        Text textusuario2 = document.createTextNode(cancion);
+        Text textusuario = document.createTextNode(Artista);
+        Text nombreU = document.createTextNode(Album);
+        Text edadU = document.createTextNode(genero );
+        Text textcontra = document.createTextNode(año);
+        Text textmusic = document.createTextNode(letra);
+        Artista1.appendChild(textusuario);
+        Año1.appendChild(textcontra);
+        Letra1.appendChild(textmusic);
+        Album1.appendChild(nombreU);
+        Genero1.appendChild(edadU);
+        Cancion1.appendChild(textusuario2);
+        //estos codigos de abajo pueden ser utiles para acceder a los elementos y sus valores
+        document.getDocumentElement().appendChild(Artista1);
+        document.getDocumentElement().appendChild(Año1);
+        document.getDocumentElement().appendChild(Letra1);
+        document.getDocumentElement().appendChild(Album1);
+        document.getDocumentElement().appendChild(Genero1);
+        document.getDocumentElement().appendChild(Cancion1);
+        Source source = new DOMSource(document);
+        Result result = new StreamResult(new File("modifyMeta.xml"));
+        Transformer transformer = new TransformerFactory() {
+            @Override
+            public Transformer newTransformer(Source source) throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public Transformer newTransformer() throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public Templates newTemplates(Source source) throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public Source getAssociatedStylesheet(Source source, String media, String title, String charset) throws TransformerConfigurationException {
+                return null;
+            }
+
+            @Override
+            public void setURIResolver(URIResolver resolver) {
+
+            }
+
+            @Override
+            public URIResolver getURIResolver() {
+                return null;
+            }
+
+            @Override
+            public void setFeature(String name, boolean value) throws TransformerConfigurationException {
+
+            }
+
+            @Override
+            public boolean getFeature(String name) {
+                return false;
+            }
+
+            @Override
+            public void setAttribute(String name, Object value) {
+
+            }
+
+            @Override
+            public Object getAttribute(String name) {
+                return null;
+            }
+
+            @Override
+            public void setErrorListener(ErrorListener listener) {
+
+            }
+
+            @Override
+            public ErrorListener getErrorListener() {
+                return null;
+            }
+        }.newInstance().newTransformer();
+        transformer.transform(source , result); ///
+        //File file = new File("registro.xml"); //bien si sirvo mi teoria, si crea el codigo como crei
+        //System.out.println(file.getAbsolutePath());
+
+
+
+
+    }
 
 
 

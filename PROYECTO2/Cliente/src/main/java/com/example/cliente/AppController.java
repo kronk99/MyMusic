@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -36,6 +37,18 @@ public class AppController implements Initializable {
     private Slider bar_Volume;
     private Media media;
     private MediaPlayer mediaPlayer;
+    @FXML
+    private TextField txtArtista;
+    @FXML
+    private TextField txtGenero;
+    @FXML
+    private TextField txtAlbum;
+    @FXML
+    private TextField txtAño;
+    @FXML
+    private TextField txtLetra;
+
+
 
 
     @Override
@@ -72,6 +85,9 @@ public class AppController implements Initializable {
     public void setMusic() {
         cliente.receivemessage1();
         media = new Media(cliente.getMusic().toURI().toString());
+        System.out.println( (String) media.getMetadata().get("artist"));
+        System.out.println( (String) media.getMetadata().get("title"));
+        System.out.println( (String) media.getMetadata().get("album"));
         mediaPlayer = new MediaPlayer(media);
 
     }
@@ -94,6 +110,19 @@ public class AppController implements Initializable {
         System.out.println(selectedItem);
         xmlBuilder1.xmlSearchMusic(selectedItem);
         File file = new File("searchMusic.xml");
+        cliente.setMusicTosend(file);
+        cliente.sendMusic();
+
+    }
+    public void modifyData() throws TransformerException {
+        String mNombre =  musicListview.getSelectionModel().getSelectedItem();
+        String Album = txtAlbum.getText();
+        String Artista = txtArtista.getText();
+        String año = txtAño.getText();
+        String genero = txtGenero.getText();
+        String letra = txtLetra.getText();
+        xmlBuilder1.mData(Artista, Album , genero ,año ,letra ,mNombre);
+        File file = new File("modifyMeta.xml");
         cliente.setMusicTosend(file);
         cliente.sendMusic();
 

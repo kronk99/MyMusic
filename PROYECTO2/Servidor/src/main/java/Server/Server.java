@@ -1,5 +1,6 @@
 package Server;
 
+import org.farng.mp3.TagException;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -84,7 +85,7 @@ public class Server implements  Runnable{
                 //closeEverything(socket , bufferedReader , bufferedWriter);
                 break;
 
-            } catch (ParserConfigurationException e) {
+            } catch (ParserConfigurationException | TagException e) {
                 e.printStackTrace();
             }
         }

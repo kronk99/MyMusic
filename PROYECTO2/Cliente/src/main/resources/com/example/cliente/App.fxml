@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cliente.AppController">
@@ -20,5 +21,11 @@
       <Button layoutX="470.0" layoutY="276.0" mnemonicParsing="false" onAction="#adddata" text="subir cancion" />
       <Slider fx:id="bar_Volume" layoutX="204.0" layoutY="346.0" />
       <Button layoutX="24.0" layoutY="264.0" mnemonicParsing="false" onAction="#setMusic" text="crear reproductor" />
+      <TextField fx:id="txtArtista" layoutX="4.0" layoutY="25.0" />
+      <TextField fx:id="txtGenero" layoutX="4.0" layoutY="61.0" />
+      <TextField fx:id="txtAlbum" layoutX="4.0" layoutY="103.0" />
+      <TextField fx:id="txtAño" layoutX="4.0" layoutY="145.0" />
+      <TextField fx:id="txtLetra" layoutX="4.0" layoutY="188.0" />
+      <Button layoutX="24.0" layoutY="226.0" mnemonicParsing="false" onAction="#modifyData" prefHeight="25.0" prefWidth="109.0" text="editmetadata" />
    </children>
 </AnchorPane>

@@ -22,6 +22,13 @@ public class xmlReader {
     private String nombre;
     private String fMusica;
     private String edad;
+    private String genero;
+    private String artista;
+    private String album;
+    private String año;
+    private String letra;
+    private String mCancion;
+
     public xmlReader() throws ParserConfigurationException {
         factory = DocumentBuilderFactory.newInstance();
         builder = factory.newDocumentBuilder();
@@ -78,6 +85,54 @@ public class xmlReader {
         System.out.println("el contenido es: " + hijo.getTextContent());
         edad=hijo.getTextContent();
     }
+    public void readMeta(String name) throws ParserConfigurationException, IOException, SAXException {
+        System.out.println("el nombre del archivo es: " + name);
+        factory = DocumentBuilderFactory.newInstance();
+        builder = factory.newDocumentBuilder();
+        doc =builder.parse(new File(name));
+        NodeList listanodo = doc.getElementsByTagName("Genero1");
+        Node nodo = listanodo.item(0);
+        Element e =(Element) nodo;
+        Node hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        genero = hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("Cancion1");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        mCancion=hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("Artista1");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        artista=hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("Album1");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        album=hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("Año1");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        año=hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("Letra1");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        letra=hijo.getTextContent();
+
+    }
 
     public String getSong() {
         return song;
@@ -99,8 +154,31 @@ public class xmlReader {
         return fMusica;
     }
 
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getLetra() {
+        return letra;
+    }
+
+    public String getAño() {
+        return año;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
+    public String getArtista() {
+        return artista;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public String getmCancion() {
+        return mCancion;
+    }
 }
