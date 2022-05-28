@@ -6,18 +6,31 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Checker {
     private int value;
     private xmlBuilder xmlBuilder;
     private xmlReader xmlReader1;
     private String music;
+
     public Checker() throws TransformerConfigurationException, ParserConfigurationException {
         value = 0;
         xmlBuilder = new xmlBuilder();
         xmlReader1 = new xmlReader();
     }
     public void check(String filename, String data , byte[] filebytes) throws IOException, TransformerException, SAXException, ParserConfigurationException {
+
+        // Se inicializa la lista
+        UsersList usersListWrite = new UsersList(); // Instancia solamente para escribir
+        UsersList usersListRead = new UsersList(); // Instancia solamente para leer, si se da
+
+        // Se crea el ArrayList para almacenar los datos del usuario
+        ArrayList<Users> usersArrayList = new ArrayList<Users>();
+
+        // Instancia para leer y escribir del archivo JSON
+        UsersDataManagement usersDataManagement = new UsersDataManagement();
+
         switch (filename){
             case "registro.xml":
                 xmlBuilder.buildXml(filename, data);
@@ -29,6 +42,17 @@ public class Checker {
                 String nombre = xmlReader1.getNombre();
                 String edad = xmlReader1.getEdad();
                 System.out.println(usuario + contraseña + musicaFav + nombre + edad);
+
+                // encryptedPassword toma lo que retorna el método getEncryptedPassword
+                String encryptedPassword;
+                encryptedPassword = Server.getEncryptedPassword(contraseña);
+
+                // Se crea el usuario
+                Users user = new Users(usuario, encryptedPassword, nombre, edad, musicaFav);
+
+                usersArrayList.add(user); // Se agrega la información en el ArrayList
+                usersListWrite.setUserList(usersArrayList); // Se actualiza la lista con la info del ArrayList
+                usersDataManagement.writeAllData(usersListWrite); // Crea (si no lo está) y escribe en archivo JSON
                 //aca deberia de leerse el xml y guardarlo en el JSON
                 //retorna un 0
                 break;

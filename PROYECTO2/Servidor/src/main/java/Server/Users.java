@@ -5,8 +5,8 @@ public class Users {
     private String username;
     private String password;
     private String name;
-    private String lastname;
-    private int age;
+    //private String lastname;
+    private String age;
     private String favoriteMusic;
 
     // Es necesario para que no mande errores
@@ -14,20 +14,20 @@ public class Users {
 
     }
 
-    public Users(String username, String password, String name, String lastname, int age, String favoriteMusic){
+    public Users(String username, String password, String name, String age, String favoriteMusic){
 
         super();
         this.username = username;
         this.password = password;
         this.name = name;
-        this.lastname = lastname;
+        //this.lastname = lastname;
         this.age = age;
         this.favoriteMusic = favoriteMusic;
     }
 
     public String toString(){
 
-        String returnValue = this.username + ", " + this.password + ", " + this.name + ", " + this.lastname + ", " + this.age + " , " + this.favoriteMusic;
+        String returnValue = this.username + ", " + this.password + ", " + this.name + ", " + ", " + this.age + " , " + this.favoriteMusic;
         return returnValue;
     }
 
@@ -55,6 +55,7 @@ public class Users {
         this.name = name;
     }
 
+    /*
     public String getLastname() {
         return lastname;
     }
@@ -62,12 +63,13 @@ public class Users {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+     */
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

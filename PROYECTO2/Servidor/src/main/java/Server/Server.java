@@ -21,7 +21,6 @@ public class Server implements  Runnable{
     private Checker chekcer;
     private FileInputStream fileInputStream;
 
-
     public Server(Socket socket) {
         try {
             this.socket = socket;
