@@ -21,7 +21,14 @@ public class Checker {
         switch (filename){
             case "registro.xml":
                 xmlBuilder.buildXml(filename, data);
+                xmlReader1.readRegister(filename);
                 System.out.println("se creo el xml");
+                String usuario = xmlReader1.getUsuario();
+                String contraseña = xmlReader1.getContrase();
+                String musicaFav = xmlReader1.getfMusica();
+                String nombre = xmlReader1.getNombre();
+                String edad = xmlReader1.getEdad();
+                System.out.println(usuario + contraseña + musicaFav + nombre + edad);
                 //aca deberia de leerse el xml y guardarlo en el JSON
                 //retorna un 0
                 break;

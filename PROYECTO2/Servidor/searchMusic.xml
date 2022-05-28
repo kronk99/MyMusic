@@ -1,1 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><searchMusic><buscarMusica>musica1.mp3</buscarMusica></searchMusic>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<searchMusic>
+    <buscarMusica>
+        musica1.mp3
+    </buscarMusica>
+</searchMusic>

@@ -17,6 +17,11 @@ public class xmlReader {
     private DocumentBuilder builder;
     private Document doc;
     private String song;
+    private String usuario;
+    private String contrase;
+    private String nombre;
+    private String fMusica;
+    private String edad;
     public xmlReader() throws ParserConfigurationException {
         factory = DocumentBuilderFactory.newInstance();
         builder = factory.newDocumentBuilder();
@@ -33,8 +38,69 @@ public class xmlReader {
         System.out.println("el contenido es: " + hijo.getTextContent());
         song = hijo.getTextContent();
     }
+    public void readRegister(String name) throws IOException, SAXException, ParserConfigurationException {
+        System.out.println("el nombre del archivo es: " + name);
+        factory = DocumentBuilderFactory.newInstance();
+        builder = factory.newDocumentBuilder();
+        doc =builder.parse(new File(name));
+        NodeList listanodo = doc.getElementsByTagName("usuario");
+        Node nodo = listanodo.item(0);
+        Element e =(Element) nodo;
+        Node hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        usuario = hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("contraseña");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        contrase=hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("musica");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        fMusica=hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("nombre");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        nombre=hijo.getTextContent();
+
+        listanodo=doc.getElementsByTagName("edad");
+        nodo = listanodo.item(0);
+        e =(Element) nodo;
+        hijo = e.getFirstChild();
+        System.out.println("el contenido es: " + hijo.getTextContent());
+        edad=hijo.getTextContent();
+    }
 
     public String getSong() {
         return song;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getContrase() {
+        return contrase;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public String getfMusica() {
+        return fMusica;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
 }

@@ -65,7 +65,7 @@ public class Server implements  Runnable{
                         dataInputStream.readFully(filecontentbyte, 0, filecontent);
                         System.out.println(filecontentbyte);
                         String filecontenido = new String(filecontentbyte); //EL ERROR ESTA ACA
-                        System.out.println(filecontenido);
+                        //System.out.println(filecontenido);
 //aca se llama la instancia de xml builder añade los argumentos de string de aca y crea el xml en el server.
 
                         //xmlBuilder1.buildXml(filename, filecontenido);
