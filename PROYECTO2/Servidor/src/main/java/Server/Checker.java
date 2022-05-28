@@ -35,7 +35,7 @@ public class Checker {
         UsersDataManagement usersDataManagement = new UsersDataManagement();
 
         switch (filename){
-            case "registro.xml":
+            case "registro.xml": //caso de registrarme, me registro en el cliente
                 xmlBuilder.buildXml(filename, data);
                 xmlReader1.readRegister(filename);
                 System.out.println("se creo el xml");
@@ -77,7 +77,7 @@ public class Checker {
                 break;
                 //leer el xml
                 //retornar un 3
-            case "modifyMeta.xml":
+            case "modifyMeta.xml": //aca se modifican los datos de las canciones con la libreria encontrada
                 xmlBuilder.buildXml(filename, data);
                 xmlReader1.readMeta(filename);
                 String genero = xmlReader1.getGenero();
@@ -95,7 +95,7 @@ public class Checker {
                 mp3File.getID3v2Tag().setSongLyric(getletra);
                 mp3File.save();
                 break;
-            default:
+            default: //caso default , crea una file de tipo mp3
                 //aca si no es ninguno de esos nombres debe crear una file y guardarla en una careta
 
                 try{

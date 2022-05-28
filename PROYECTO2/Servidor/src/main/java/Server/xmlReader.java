@@ -28,11 +28,11 @@ public class xmlReader {
     private String año;
     private String letra;
     private String mCancion;
-
+//Constructor de la clase reader
     public xmlReader() throws ParserConfigurationException {
         factory = DocumentBuilderFactory.newInstance();
         builder = factory.newDocumentBuilder();
-    }
+    }//metodo que lee archivos xml "normales"
     public void readXml(String name) throws IOException, SAXException, ParserConfigurationException {
         System.out.println("el nombre del archivo es: " + name);
         factory = DocumentBuilderFactory.newInstance();
@@ -44,7 +44,7 @@ public class xmlReader {
         Node hijo = e.getFirstChild();
         System.out.println("el contenido es: " + hijo.getTextContent());
         song = hijo.getTextContent();
-    }
+    }//metodo que lee archivos xml con el nombre de registro.xml
     public void readRegister(String name) throws IOException, SAXException, ParserConfigurationException {
         System.out.println("el nombre del archivo es: " + name);
         factory = DocumentBuilderFactory.newInstance();
@@ -84,7 +84,7 @@ public class xmlReader {
         hijo = e.getFirstChild();
         System.out.println("el contenido es: " + hijo.getTextContent());
         edad=hijo.getTextContent();
-    }
+    }//metodo que lee archivos xml de tipo metadata
     public void readMeta(String name) throws ParserConfigurationException, IOException, SAXException {
         System.out.println("el nombre del archivo es: " + name);
         factory = DocumentBuilderFactory.newInstance();
@@ -133,7 +133,9 @@ public class xmlReader {
         letra=hijo.getTextContent();
 
     }
-
+//GETTERS Y SETTERS DE ATRIBUTOS
+    //para 2 de los metodos de arriba se ocupan guardar variables y pasarlas de vuelta a
+    //la clase checklist
     public String getSong() {
         return song;
     }

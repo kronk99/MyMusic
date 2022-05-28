@@ -21,7 +21,7 @@ import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+//CONTROLADOR DE LA ESCENA APP
 public class AppController implements Initializable {
     private Cliente cliente;
     private xmlBuilder xmlBuilder1;
@@ -50,7 +50,7 @@ public class AppController implements Initializable {
 
 
 
-
+//METODO INITIALICE QUE REALIZA TODO LO QUE EL HILO DE LA GUI NO PUEDE HACER
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.cliente = new Cliente();
@@ -67,7 +67,7 @@ public class AppController implements Initializable {
             }
         });
     }
-
+//METODO QUE AÑADE CANCIONES Y LAS ENVIA AL SERVIDOR
     public void adddata() {
         File file = filechoser.showOpenDialog(new Stage());
         System.out.println(file);
@@ -81,13 +81,13 @@ public class AppController implements Initializable {
         //int valor = musicListview.getSelectionModel().getSelectedIndex();
         //musicListview.getItems().remove(valor);
     }
-
+//METODO QUE CREA EL CONSTRUCTOR del reproductor de musica
     public void setMusic() {
         cliente.receivemessage1();
         media = new Media(cliente.getMusic().toURI().toString());
-        System.out.println( (String) media.getMetadata().get("artist"));
-        System.out.println( (String) media.getMetadata().get("title"));
-        System.out.println( (String) media.getMetadata().get("album"));
+        //System.out.println( (String) media.getMetadata().get("artist"));
+        //System.out.println( (String) media.getMetadata().get("title"));
+        //System.out.println( (String) media.getMetadata().get("album"));
         mediaPlayer = new MediaPlayer(media);
 
     }
